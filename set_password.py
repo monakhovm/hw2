@@ -6,6 +6,29 @@ def check_user_exists(username: str) -> bool:
     pass
 
 
+def check_is_root_user(username: str) -> bool:
+    """
+    Checking if the user running the script is a root user.
+    """
+    pass
+
+
+def check_is_current_user(username: str) -> bool:
+    """
+    Checking if the user executing the script is
+    the user whose password is being changed.
+    """
+    pass
+
+
+def elevate_privileges() -> None:
+    """
+    Elevate the rights of the script
+    to change the password in the system.
+    """
+    pass
+
+
 def check_user_has_password(username: str) -> bool:
     """Checking if the user has a password."""
     pass
