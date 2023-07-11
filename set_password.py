@@ -34,10 +34,6 @@ def input_password() -> str:
     pass
 
 
-def validate_password(password: str) -> bool:
-    """Checking the password for compliance."""
-    pass
-
 
 def generate_password() -> str:
     """Password generation."""
