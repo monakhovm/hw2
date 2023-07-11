@@ -43,9 +43,14 @@ def input_password() -> str:
         print("Password does not meet requirements. Try again.")
 
 
-def generate_password() -> str:
+def generate_password(len: int = LEN_PWD) -> str:
     """Password generation."""
-    pass
+    # TODO: what visible characters can not be used in the Linux system in user passwords?
+    charset = ascii_letters + digits + punctuation
+    while True:
+        password = "".join(choices(charset, k=len))
+        if validate_password(password):
+            return password
 
 
 def validate_password(password: str) -> bool:
@@ -64,12 +69,20 @@ def validate_password(password: str) -> bool:
 def set_password(username: str, password: str) -> None:
     """Setting a user password."""
     current_user = os.getenv("USER")
-    
+
     if check_is_current_user:
-        command = (f"echo \"{username}:{password}\" | sudo chpasswd")
+        command = f'echo "{username}:{password}" | sudo chpasswd'
     else:
         current_password = getpass("Input current password: ")
-        command = ("echo -e \"" + current_password + "\n" + password + "\n" + password + "\" | passwd ")
+        command = (
+            'echo -e "'
+            + current_password
+            + "\n"
+            + password
+            + "\n"
+            + password
+            + '" | passwd '
+        )
 
     os.system(command)
 
