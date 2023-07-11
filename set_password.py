@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+import os
+import subprocess
+from getpass import getpass, getuser
+from random import choices
+from string import ascii_lowercase, ascii_uppercase, digits, punctuation, ascii_letters
+
 
 def check_user_exists(username: str) -> bool:
     """Check if the user exists in the system."""
@@ -19,6 +25,7 @@ def input_password() -> str:
     We ask the user to enter a password and check it for compliance
     with the requirements or generate a password automatically.
     """
+    pass
 
 
 def validate_password(password: str) -> bool:
