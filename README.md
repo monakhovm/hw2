@@ -29,7 +29,7 @@ git checkout -b <name_branch>
 
 4. add changes to index
 ```bash
-git add <feature>
+git add set_password.py
 ```
 5. commit changes
 ```bash
