@@ -49,6 +49,17 @@ def validate_password(password: str) -> bool:
 def generate_password() -> str:
     """Password generation."""
     pass
+def validate_password(password: str) -> bool:
+    """Checking the password for compliance."""
+    if MIN_LEN_PWD < len(password) > MAX_LEN_PWD:
+        return False
+
+    return not (
+        set(ascii_lowercase).isdisjoint(password)
+        or set(ascii_uppercase).isdisjoint(password)
+        or set(digits).isdisjoint(password)
+        or set(punctuation).isdisjoint(password)
+    )
 
 
 def set_password(username: str, password: str) -> None:
