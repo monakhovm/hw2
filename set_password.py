@@ -55,7 +55,15 @@ def main() -> None:
     make sure the user exists. Request a password,
     set a password for a user.
     """
-    pass
+    username = input("Enter username: ")
+
+    if not check_user_exists(username):
+        print("User does not exist.")
+        return None
+
+    password = input_password()
+    set_password(username, password)
+    print("Password set successfully.")
 
 
 if __name__ == "__main__":
