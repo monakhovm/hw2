@@ -31,13 +31,23 @@ def input_password() -> str:
     We ask the user to enter a password and check it for compliance
     with the requirements or generate a password automatically.
     """
-    pass
-
+    while True:
+        password = getpass("Enter new password: ")
+        if not password:
+            if input("Generate a password automatically? (yes/no): ").lower() == "yes":
+                password = generate_password()
+            else:
+                continue
+        if validate_password(password):
+            return password
+        print("Password does not meet requirements. Try again.")
 
 
 def generate_password() -> str:
     """Password generation."""
     pass
+
+
 def validate_password(password: str) -> bool:
     """Checking the password for compliance."""
     if MIN_LEN_PWD < len(password) > MAX_LEN_PWD:
@@ -53,7 +63,15 @@ def validate_password(password: str) -> bool:
 
 def set_password(username: str, password: str) -> None:
     """Setting a user password."""
-    pass
+    current_user = os.getenv("USER")
+    
+    if check_is_current_user:
+        command = (f"echo \"{username}:{password}\" | sudo chpasswd")
+    else:
+        current_password = getpass("Input current password: ")
+        command = ("echo -e \"" + current_password + "\n" + password + "\n" + password + "\" | passwd ")
+
+    os.system(command)
 
 
 def main() -> None:
