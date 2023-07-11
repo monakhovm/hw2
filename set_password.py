@@ -63,9 +63,8 @@ def validate_password(password: str) -> bool:
 
 def set_password(username: str, password: str) -> None:
     """Setting a user password."""
-    current_user = os.getenv("USER")
     
-    if check_is_current_user:
+    if check_is_current_user(username):
         command = (f"echo \"{username}:{password}\" | sudo chpasswd")
     else:
         current_password = getpass("Input current password: ")
