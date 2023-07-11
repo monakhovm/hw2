@@ -7,6 +7,12 @@ from random import choices
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation, ascii_letters
 
 
+# TODO: what values ​​to use?
+LEN_PWD = 8
+MIN_LEN_PWD = 8
+MAX_LEN_PWD = 32
+
+
 def check_user_exists(username: str) -> bool:
     """Check if the user exists in the system."""
     pass
