@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
 
+import os
+import subprocess
+from getpass import getpass, getuser
+from random import choices
+from string import ascii_lowercase, ascii_uppercase, digits, punctuation, ascii_letters
+
+
+# TODO: what values ​​to use?
+LEN_PWD = 8
+MIN_LEN_PWD = 8
+MAX_LEN_PWD = 32
+
 
 def check_user_exists(username: str) -> bool:
     """Check if the user exists in the system."""
-    pass
-
-
-def check_is_root_user(username: str) -> bool:
-    """
-    Checking if the user running the script is a root user.
-    """
     pass
 
 
@@ -21,24 +26,12 @@ def check_is_current_user(username: str) -> bool:
     pass
 
 
-def elevate_privileges() -> None:
-    """
-    Elevate the rights of the script
-    to change the password in the system.
-    """
-    pass
-
-
-def check_user_has_password(username: str) -> bool:
-    """Checking if the user has a password."""
-    pass
-
-
 def input_password() -> str:
     """
     We ask the user to enter a password and check it for compliance
     with the requirements or generate a password automatically.
     """
+    pass
 
 
 def validate_password(password: str) -> bool:
@@ -73,7 +66,15 @@ def main() -> None:
     make sure the user exists. Request a password,
     set a password for a user.
     """
-    pass
+    username = input("Enter username: ")
+
+    if not check_user_exists(username):
+        print("User does not exist.")
+        return None
+
+    password = input_password()
+    set_password(username, password)
+    print("Password set successfully.")
 
 
 if __name__ == "__main__":
