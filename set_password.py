@@ -32,15 +32,22 @@ def input_password() -> str:
     with the requirements or generate a password automatically.
     """
     while True:
-        password = getpass("Enter new password: ")
+        print('''
+    New password should contain minimum:
+        1 lowercase letter
+        1 uppercase letter
+        1 digit
+        1 special symbol
+    ''')
+        password = getpass(f'Enter new password (length {MIN_LEN_PWD}-{MAX_LEN_PWD} symbols): ')
         if not password:
-            if input("Generate a password automatically? (yes/no): ").lower() == "yes":
+            if input("Generate a password automatically? (Only \"yes\" or \"no\"!): ").lower() == "yes":
                 password = generate_password()
             else:
                 continue
         if validate_password(password):
             return password
-        print("Password does not meet requirements. Try again.")
+        print("\n\n", "="*50, "\n\nPassword does not meet requirements. Try again.")
 
 
 def generate_password(len: int = LEN_PWD) -> str:
