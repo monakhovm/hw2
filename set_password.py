@@ -67,23 +67,31 @@ def validate_password(password: str) -> bool:
 
 
 def set_password(username: str, password: str) -> None:
-    """Setting a user password."""
-
-    if check_is_current_user(username):
-        command = (f"echo \"{username}:{password}\" | sudo chpasswd")
-    else:
-        current_password = getpass("Input current password: ")
-        command = (
-            'echo -e "'
-            + current_password
-            + "\n"
-            + password
-            + "\n"
-            + password
-            + '" | passwd '
-        )
-
-    os.system(command)
+      """Setting a user password."""
+   
+      if check_is_current_user(username):
+          current_password = getpass("Input current password: ")
+          command = (
+              'echo "'
+              + current_password
+              + "\n"
+              + password
+              + "\n"
+              + password
+              + '" | passwd'
+          )
+      else:
+          command = (
+              'echo "'
+              + password
+              + '\n'
+              + password
+              + ' | sudo passwd '
+              + username
+              + '"'
+          )
+   
+      subprocess.run(command, shell=True, stdout=subprocess.DEVNULL)
 
 
 def main() -> None:
