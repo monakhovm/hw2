@@ -15,6 +15,12 @@ Useful Links https://www.maketecheasier.com/how-linux-stores-manages-user-passwo
 
 ---
 
+## How to run the script:
+```bash
+./set_password.py
+```
+---
+
 ## Git flow
 1. clone the repository
 ```bash
