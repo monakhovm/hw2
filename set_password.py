@@ -28,7 +28,7 @@ def check_is_current_user(username: str) -> bool:
     Checking if the user executing the script is
     the user whose password is being changed.
     """
-    pass
+    return getuser() == username
 
 
 def input_password() -> str:
