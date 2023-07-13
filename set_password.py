@@ -15,7 +15,12 @@ MAX_LEN_PWD = 32
 
 def check_user_exists(username: str) -> bool:
     """Check if the user exists in the system."""
-    pass
+    try:
+        subprocess.check_output(f"id -u ", shell=True, stderr=subprocess.DEVNULL)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+  
 
 
 def check_is_current_user(username: str) -> bool:
@@ -32,22 +37,31 @@ def input_password() -> str:
     with the requirements or generate a password automatically.
     """
     while True:
-        print('''
+        print(
+            """
     New password should contain minimum:
         1 lowercase letter
         1 uppercase letter
         1 digit
         1 special symbol
-    ''')
-        password = getpass(f'Enter new password (length {MIN_LEN_PWD}-{MAX_LEN_PWD} symbols): ')
+    """
+        )
+        password = getpass(
+            f"Enter new password (length {MIN_LEN_PWD}-{MAX_LEN_PWD} symbols): "
+        )
         if not password:
-            if input("Generate a password automatically? (Only \"yes\" or \"no\"!): ").lower() == "yes":
+            if (
+                input(
+                    'Generate a password automatically? (Only "yes" or "no"!): '
+                ).lower()
+                == "yes"
+            ):
                 password = generate_password()
             else:
                 continue
         if validate_password(password):
             return password
-        print("\n\n", "="*50, "\n\nPassword does not meet requirements. Try again.")
+        print("\n\n", "=" * 50, "\n\nPassword does not meet requirements. Try again.")
 
 
 def generate_password(len: int = LEN_PWD) -> str:
@@ -74,31 +88,25 @@ def validate_password(password: str) -> bool:
 
 
 def set_password(username: str, password: str) -> None:
-      """Setting a user password."""
-   
-      if check_is_current_user(username):
-          current_password = getpass("Input current password: ")
-          command = (
-              'echo "'
-              + current_password
-              + "\n"
-              + password
-              + "\n"
-              + password
-              + '" | passwd'
-          )
-      else:
-          command = (
-              'echo "'
-              + password
-              + '\n'
-              + password
-              + ' | sudo passwd '
-              + username
-              + '"'
-          )
-   
-      subprocess.run(command, shell=True, stdout=subprocess.DEVNULL)
+    """Setting a user password."""
+
+    if check_is_current_user(username):
+        current_password = getpass("Input current password: ")
+        command = (
+            'echo "'
+            + current_password
+            + "\n"
+            + password
+            + "\n"
+            + password
+            + '" | passwd'
+        )
+    else:
+        command = (
+            'echo "' + password + "\n" + password + " | sudo passwd " + username + '"'
+        )
+
+    subprocess.run(command, shell=True, stdout=subprocess.DEVNULL)
 
 
 def main() -> None:
