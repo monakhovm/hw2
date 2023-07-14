@@ -60,6 +60,7 @@ def input_password() -> str:
             else:
                 continue
         if validate_password(password):
+            print(password)
             return password
         print("\n\n", "=" * 50, "\n\nPassword does not meet requirements. Try again.")
 
