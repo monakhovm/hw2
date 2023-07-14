@@ -60,7 +60,6 @@ def input_password() -> str:
             else:
                 continue
         if validate_password(password):
-            print(password)
             return password
         print("\n\n", "=" * 50, "\n\nPassword does not meet requirements. Try again.")
 
@@ -72,6 +71,7 @@ def generate_password(len: int = LEN_PWD) -> str:
     while True:
         password = "".join(choices(charset, k=len))
         if validate_password(password):
+            print(password)
             return password
 
 
