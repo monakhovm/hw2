@@ -95,8 +95,9 @@ def set_password(username: str, password: str) -> None:
         current_password = getpass("Input current password: ")
         command = (f'echo "{current_password}\n{password}\n{password}" | passwd')
     else:
-        command = (f'echo "{password}\n{password}" | sudo passwd {username} > /dev/null')
-    subprocess.run(command, shell=True, stdout=subprocess.DEVNULL)
+        command = (f'echo "{password}\n{password}" | sudo passwd {username}')
+        
+    subprocess.run(command,shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
 def main() -> None:
     """
@@ -111,10 +112,9 @@ def main() -> None:
         return None
 
     password = input_password()
-    if set_password(username, password):
-        print("\x1b[1;32mPassword set successfully.")
-    else:
-        print("\x1b[1;31mSomething went wrong. Try again with different password value.")
+    set_password(username, password)
+    print("\x1b[1;32mProgram finished.")
+    
 
 
 if __name__ == "__main__":
