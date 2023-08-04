@@ -16,11 +16,10 @@ MAX_LEN_PWD = 32
 def check_user_exists(username: str) -> bool:
     """Check if the user exists in the system."""
     try:
-        subprocess.check_output(f"id -u ", shell=True, stderr=subprocess.DEVNULL)
+        subprocess.check_output(f"id -u {username}", shell=True, stderr=subprocess.DEVNULL)
         return True
     except subprocess.CalledProcessError:
         return False
-  
 
 
 def check_is_current_user(username: str) -> bool:
