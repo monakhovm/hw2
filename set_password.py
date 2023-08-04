@@ -94,7 +94,7 @@ def validate_password(password: str) -> bool:
     )
 
 
-def set_password(username: str, password: str) -> None:
+def set_password(username: str, password: str) -> bool:
     """Setting a user password."""
 
     if check_is_current_user(username):
@@ -103,7 +103,9 @@ def set_password(username: str, password: str) -> None:
     else:
         command = (f'echo "{password}\n{password}" | sudo passwd {username}')
         
-    subprocess.run(command,shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+    result = subprocess.run(command, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+    return not result.returncode
+
 
 def main() -> None:
     """
