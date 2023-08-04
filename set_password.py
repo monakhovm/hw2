@@ -60,21 +60,22 @@ Leave empty to generate password automatically!
                 password = generate_password()
             else:
                 continue
-        if validate_password(password):
-            print("\x1b[1;32m", password, "\x1b[1;0m")
-            return password
-        print("\x1b[1;31m", password, "\x1b[1;0m")
-        print("\n\n", "=" * 50, "\n\nPassword does not meet requirements. Try again.")
+        elif not validate_password(password):
+            print("\x1b[1;31m", password, "\x1b[1;0m")
+            print(
+                "\n\n", "=" * 50, "\n\nPassword does not meet requirements. Try again."
+            )
+            continue
+        print("\x1b[1;32m", password, "\x1b[1;0m")
+        return password
 
 
 def generate_password(len: int = LEN_PWD) -> str:
     """Password generation."""
-    # TODO: what visible characters can not be used in the Linux system in user passwords?
     charset = ascii_letters + digits + punctuation
     while True:
         password = "".join(choices(charset, k=len))
         if validate_password(password):
-            print(password)
             return password
 
 
