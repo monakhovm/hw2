@@ -39,11 +39,15 @@ def input_password() -> str:
     while True:
         print(
             """
+! Only english letters and symbols are acceptable !
+    
     New password should contain minimum:
         1 lowercase letter
         1 uppercase letter
         1 digit
         1 special symbol
+
+Leave empty to generate password automatically!
     """
         )
         password = getpass(
@@ -60,7 +64,9 @@ def input_password() -> str:
             else:
                 continue
         if validate_password(password):
+            print("\x1b[1;32m", password, "\x1b[1;0m")
             return password
+        print("\x1b[1;31m", password, "\x1b[1;0m")
         print("\n\n", "=" * 50, "\n\nPassword does not meet requirements. Try again.")
 
 
