@@ -119,10 +119,11 @@ def main() -> None:
         return None
 
     password = input_password()
-    if (set_password(username, password)):
-        print("\x1b[1;32mProgram finished.")
+    if set_password(username, password):
+        print("\x1b[1;32mProgram finished.\033[0m")
     else:
-        print("\x1b[1;31mSomething went wrong.")
+        print("\x1b[1;31mSomething went wrong.\033[0m")
+
 
 if __name__ == "__main__":
     main()
