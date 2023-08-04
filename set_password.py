@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
-import os
 import subprocess
 from getpass import getpass, getuser
 from random import choices
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation, ascii_letters
 
 
-# TODO: what values ​​to use?
 LEN_PWD = 8
 MIN_LEN_PWD = 8
 MAX_LEN_PWD = 32
@@ -98,11 +96,13 @@ def set_password(username: str, password: str) -> bool:
 
     if check_is_current_user(username):
         current_password = getpass("Input current password: ")
-        command = (f'echo "{current_password}\n{password}\n{password}" | passwd')
+        command = f'echo "{current_password}\n{password}\n{password}" | passwd'
     else:
-        command = (f'echo "{password}\n{password}" | sudo passwd {username}')
-        
-    result = subprocess.run(command, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+        command = f'echo "{password}\n{password}" | sudo passwd {username}'
+
+    result = subprocess.run(
+        command, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL
+    )
     return not result.returncode
 
 
